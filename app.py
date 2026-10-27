@@ -12,19 +12,26 @@ st.set_page_config(
 # Compact dashboard styling to reduce scrolling.
 st.markdown("""
 <style>
-.block-container {padding-top: .25rem; padding-bottom: .1rem; max-width: 1900px;}
-h1 {font-size: 1.3rem !important; padding-bottom: 0 !important; margin-bottom: 0 !important; line-height: 1.15 !important;}
-h2, h3 {font-size: .9rem !important; margin-bottom: .15rem !important;}
-p {margin-bottom: .12rem;}
-div[data-testid="stMetric"] {padding: 3px 7px; border: 1px solid #e4e7eb; border-radius: 7px;}
-div[data-testid="stMetricLabel"] {font-size: .78rem;}
-div[data-testid="stMetricValue"] {font-size: 1.05rem;}
-div[data-testid="stPlotlyChart"] {margin-top: -8px; margin-bottom: -35px;}
-section[data-testid="stSidebar"] {min-width: 245px !important; max-width: 245px !important;}
-hr {margin: .2rem 0 !important;}
-footer {visibility: hidden;}
+:root { color-scheme: light; }
+.stApp { background: linear-gradient(135deg, #f5f7ff 0%, #f8fafc 55%, #eef4ff 100%); }
+.block-container { padding: 1.1rem 1.6rem .7rem 1.6rem; max-width: 1900px; }
+h1 { color: #14213d; font-size: 1.8rem !important; font-weight: 800 !important; letter-spacing: -.04em; padding-bottom: 0 !important; margin-bottom: .1rem !important; }
+h2, h3 { color: #23395d; font-weight: 700 !important; }
+p { color: #52627a; }
+div[data-testid="stMetric"] { background: linear-gradient(145deg, #ffffff, #f4f7ff); padding: 14px 16px; border: 1px solid #dce5f5; border-radius: 15px; box-shadow: 0 5px 18px rgba(31, 56, 100, .06); }
+div[data-testid="stMetricLabel"] { color: #65748b; font-size: .82rem; font-weight: 650; }
+div[data-testid="stMetricValue"] { color: #172b4d; font-size: 1.55rem; font-weight: 800; }
+div[data-testid="stPlotlyChart"] { background: #ffffff; border: 1px solid #e1e8f4; border-radius: 15px; padding: 8px 8px 0 8px; box-shadow: 0 6px 20px rgba(31, 56, 100, .055); margin: 0 0 12px 0; }
+section[data-testid="stSidebar"] { background: #111d35; min-width: 260px !important; max-width: 260px !important; }
+section[data-testid="stSidebar"] * { color: #f2f6ff; }
+section[data-testid="stSidebar"] div[data-baseweb="select"] span { color: #182641; }
+section[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"] p { color: #c4d0e5; }
+section[data-testid="stSidebar"] button { border-radius: 9px; }
+div[data-testid="stAlert"] { border-radius: 12px; }
+hr { margin: .5rem 0 !important; border-color: #e1e8f4; }
+footer { visibility: hidden; }
 </style>
-""", unsafe_allow_html=True)
+"""
 
 BLUE, ORANGE, GREEN, PURPLE = "#4263EB", "#F76707", "#12B886", "#7950F2"
 PALETTE = [BLUE, ORANGE, GREEN, PURPLE]
@@ -101,8 +108,8 @@ if status == "Profitable only":
 elif status == "Loss-making only":
     filtered = filtered[filtered["Profit"] < 0]
 
-st.title("📊 Business Sales Performance Dashboard")
-st.caption("Future Interns • Task 1 | Interactive sales, profit, product and regional analysis")
+st.title("📊 Sales Performance")
+st.caption("FUTURE INTERNS  /  TASK 1     •     Explore sales, profitability and customer segments")
 
 if filtered.empty:
     st.warning("No records match these filters. Adjust the filters in the left sidebar.")
@@ -114,7 +121,7 @@ total_qty = filtered["Quantity"].sum()
 margin = total_profit / total_sales * 100 if total_sales else 0
 
 # KPI row
-k1, k2, k3, k4 = st.columns(4)
+k1, k2, k3, k4 = st.columns(4, gap="medium")
 k1.metric("Total Sales", f"${total_sales:,.0f}")
 k2.metric("Total Profit", f"${total_profit:,.0f}", delta=f"{margin:.1f}% margin")
 k3.metric("Quantity Sold", f"{total_qty:,.0f}")
@@ -132,7 +139,7 @@ with left:
                  color="Category", color_discrete_map={"Technology": BLUE, "Furniture": ORANGE, "Office Supplies": GREEN},
                  title="Sales Share by Category")
     pie.update_traces(textposition="inside", textinfo="percent+label", textfont_size=11)
-    pie.update_layout(template="plotly_white", height=190, margin=dict(t=32,b=2,l=2,r=2), showlegend=False)
+    pie.update_layout(template="plotly_white", height=260, margin=dict(t=48,b=12,l=12,r=12), showlegend=False)
     st.plotly_chart(pie, use_container_width=True, config={"displayModeBar": False})
 
 with right:
@@ -140,7 +147,7 @@ with right:
                  color_discrete_sequence=PALETTE, title="Sales by Region")
     bar.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False)
     bar.update_layout(template="plotly_white", height=255, showlegend=False,
-                      margin=dict(t=42,b=5,l=5,r=5), yaxis=dict(gridcolor="#E9ECEF"))
+                      margin=dict(t=42,b=5,l=5,r=5), yaxis=dict(gridcolor="#E9ECEF", zeroline=False), plot_bgcolor="#FFFFFF", paper_bgcolor="#FFFFFF", font=dict(family="Arial", color="#23395D"))
     st.plotly_chart(bar, use_container_width=True, config={"displayModeBar": False})
 
 left2, right2 = st.columns(2, gap="medium")
@@ -151,7 +158,7 @@ with left2:
         title="Profit / Loss by Sub-category", labels={"Profit": "Profit ($)"}
     )
     profit_chart.add_vline(x=0, line_dash="dash", line_color="#343A40")
-    profit_chart.update_layout(template="plotly_white", height=215, margin=dict(t=32,b=2,l=2,r=2),
+    profit_chart.update_layout(template="plotly_white", height=300, margin=dict(t=48,b=12,l=12,r=12),
                                coloraxis_showscale=False, yaxis_title=None, xaxis=dict(gridcolor="#E9ECEF"))
     st.plotly_chart(profit_chart, use_container_width=True, config={"displayModeBar": False})
 
@@ -174,7 +181,8 @@ trend = px.line(
     title="Sales by Discount Level",
     labels={"Discount": "Discount", "Sales": "Sales ($)"}
 )
-trend.update_traces(line=dict(color=BLUE, width=3), marker=dict(size=6))
+trend.update_traces(line=dict(color=BLUE, width=3), marker=dict(size=8, color=ORANGE),
+                    fill="tozeroy", fillcolor="rgba(66,99,235,0.10)")
 trend.update_layout(
     template="plotly_white", height=190,
     margin=dict(t=32, b=2, l=5, r=5),
@@ -187,7 +195,7 @@ st.plotly_chart(trend, use_container_width=True, config={"displayModeBar": False
 best_cat = category.loc[category["Sales"].idxmax()]
 best_region = region.loc[region["Sales"].idxmax()]
 worst_subcat = subcategory.iloc[0]
-ins1, ins2, ins3 = st.columns(3, gap="small")
+ins1, ins2, ins3 = st.columns(3, gap="medium")
 ins1.info(f"**Top category:** {best_cat['Category']} · ${best_cat['Sales']:,.0f} sales")
 ins2.info(f"**Top region:** {best_region['Region']} · ${best_region['Sales']:,.0f} sales")
 if worst_subcat["Profit"] < 0:
