@@ -22,11 +22,16 @@ st.markdown("""
 }
 .block-container { padding: 1.1rem 1.5rem .8rem 1.5rem; max-width: 1900px; }
 h1 {
-  color: #f4fbff !important; font-size: 2rem !important; font-weight: 900 !important;
-  letter-spacing: -.035em; text-shadow: 0 0 8px rgba(0,229,255,.9), 0 0 22px rgba(0,229,255,.48), 0 0 42px rgba(99,102,241,.28);
+  color: #f4f7ff !important; font-size: 1.9rem !important; font-weight: 750 !important;
+  letter-spacing: -.025em; text-shadow: none !important;
   padding-bottom: .15rem !important; margin-bottom: .15rem !important;
 }
-h2, h3 { color: #c9f7ff !important; text-shadow: 0 0 10px rgba(0,229,255,.18); font-weight: 750 !important; }
+h2, h3 { color: #d7e5ff !important; text-shadow: none !important; font-weight: 650 !important; }
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+  color: #e4ecff !important; text-shadow: none !important; font-weight: 650 !important;
+}
 p, label, .stMarkdown { color: #b9c8e5; }
 [data-testid="stCaptionContainer"] { color: #9eb2d6 !important; }
 div[data-testid="stMetric"] {
@@ -144,8 +149,8 @@ if status == "Profitable only":
 elif status == "Loss-making only":
     filtered = filtered[filtered["Profit"] < 0]
 
-st.title("✦ SALES PERFORMANCE DASHBOARD")
-st.caption("FUTURE INTERNS  /  TASK 1     •     SALES  ✦  PROFITABILITY  ✦  CUSTOMER INSIGHTS")
+st.title("Business Sales Performance Analysis")
+st.caption("FUTURE INTERNS · TASK 1  |  Sales, profitability and customer insights")
 
 if filtered.empty:
     st.warning("No records match these filters. Adjust the filters in the left sidebar.")
