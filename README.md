@@ -119,8 +119,8 @@ This project demonstrates how retail sales data can be analyzed and transformed 
 
 🐍 Python | 📊 Power BI | 📈 Tableau | 🗃️ SQL | 📑 Excel
 
-🔗 GitHub: Aryan18-03
+🔗 GitHub: [github.com/Aryan18-03](https://github.com/Aryan18-03)
 
-🔗 LinkedIn: Aryan — Data Analyst
+🔗 LinkedIn: [linkedin.com/in/aryan-data-analyst](https://www.linkedin.com/in/aryan-data-analyst/)
 
 ⭐ If you find this project interesting, consider starring the repository!
