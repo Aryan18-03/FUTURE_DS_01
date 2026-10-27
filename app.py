@@ -163,6 +163,26 @@ with right2:
                        margin=dict(t=42,b=5,l=5,r=5), yaxis=dict(gridcolor="#E9ECEF"))
     st.plotly_chart(line, use_container_width=True, config={"displayModeBar": False})
 
+# Compact line chart: sales trend across discount levels (dataset has no reliable date field).
+discount_trend = (
+    filtered.groupby("Discount", as_index=False)
+    .agg(Sales=("Sales", "sum"))
+    .sort_values("Discount")
+)
+trend = px.line(
+    discount_trend, x="Discount", y="Sales", markers=True,
+    title="Sales by Discount Level",
+    labels={"Discount": "Discount", "Sales": "Sales ($)"}
+)
+trend.update_traces(line=dict(color=BLUE, width=3), marker=dict(size=6))
+trend.update_layout(
+    template="plotly_white", height=190,
+    margin=dict(t=32, b=2, l=5, r=5),
+    xaxis=dict(tickformat=".0%", gridcolor="#E9ECEF"),
+    yaxis=dict(gridcolor="#E9ECEF")
+)
+st.plotly_chart(trend, use_container_width=True, config={"displayModeBar": False})
+
 # Short business insight strip rather than a long section.
 best_cat = category.loc[category["Sales"].idxmax()]
 best_region = region.loc[region["Sales"].idxmax()]
