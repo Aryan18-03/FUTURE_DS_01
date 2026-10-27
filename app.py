@@ -67,7 +67,7 @@ div[data-testid="stDataFrame"] { border: 1px solid rgba(0,229,255,.2); border-ra
 hr { margin: .5rem 0 !important; border-color: rgba(0,229,255,.18); }
 footer { visibility: hidden; }
 </style>
-"""
+""", unsafe_allow_html=True)
 
 BLUE, ORANGE, GREEN, PURPLE = "#00E5FF", "#FF9F43", "#35F2A0", "#A78BFA"
 PALETTE = [BLUE, ORANGE, GREEN, PURPLE]
