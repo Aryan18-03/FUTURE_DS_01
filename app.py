@@ -182,7 +182,7 @@ with left:
     pie = px.pie(category, names="Category", values="Sales", hole=.42,
                  color="Category", color_discrete_map={"Technology": BLUE, "Furniture": ORANGE, "Office Supplies": GREEN},
                  title="Sales Share by Category")
-    pie.update_traces(textposition="inside", textinfo="percent+label", textfont_size=11)
+    pie.update_traces(textposition="inside", textinfo="percent+label", textfont=dict(color="#172033", size=12, family="Arial"))
     pie.update_layout(template="plotly_dark", height=290, margin=dict(t=58,b=20,l=18,r=18), showlegend=False,
                       title_font=dict(size=17, color="#F1F5FF"), font=dict(color="#EAF2FF"),
                       paper_bgcolor="#0D172B", plot_bgcolor="#0D172B")
