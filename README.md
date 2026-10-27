@@ -4,6 +4,15 @@
 
 🔗 **[Click here to explore the interactive dashboard](https://futureds01-5hddaqfnzn8awz3zugsyef.streamlit.app/)**
 
+
+## 📊 Dashboard Preview
+
+![Business Sales Performance Dashboard](business-sales-dashboard.png)
+
+**Live Dashboard:** https://futureds01-5hddaqfnzn8awz3zugsyef.streamlit.app/
+
+**Tools Used:** Python, Pandas, Plotly, Streamlit
+
 📊 Explore sales, profit, product categories, regional performance, and customer segments through interactive visualizations and filters.
 
 ## 📝 Project Overview
