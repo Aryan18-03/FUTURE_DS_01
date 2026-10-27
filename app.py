@@ -23,8 +23,6 @@ st.markdown("""
 header[data-testid="stHeader"] { background: transparent !important; height: 2.5rem !important; }
 /* Keep the dashboard clean for portfolio screenshots */
 div[data-testid="stToolbar"], div[data-testid="stDecoration"], #MainMenu { visibility: hidden !important; height: 0 !important; }
-iframe[title="streamlit_plotly_chart"] { overflow: hidden !important; }
-div[data-testid="stPlotlyChart"] > div { overflow: visible !important; }
 .block-container { padding: 2.1rem 1.6rem 1.2rem 1.6rem !important; max-width: 1900px; }
 h1 { line-height: 1.3 !important; overflow: visible !important; }
 h1 {
@@ -54,7 +52,8 @@ div[data-testid="stPlotlyChart"] {
   margin: 0 0 16px 0; overflow: visible !important;
 }
 div[data-testid="stPlotlyChart"] * { color: #eaf2ff; }
-div[data-testid="stPlotlyChart"]:hover { box-shadow: 0 10px 24px rgba(0,0,0,.28); }
+div[data-testid="stPlotlyChart"]:hover { box-shadow: 0 8px 22px rgba(0,0,0,.22); }
+div[data-testid="stPlotlyChart"], div[data-testid="stPlotlyChart"] iframe { animation: none !important; transition: none !important; }
 section[data-testid="stSidebar"] {
   background: linear-gradient(180deg, #0b1328 0%, #090f20 100%);
   border-right: 1px solid rgba(0,229,255,.25); min-width: 270px !important; max-width: 270px !important;
