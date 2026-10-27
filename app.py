@@ -21,6 +21,10 @@ st.markdown("""
   color: #eaf2ff;
 }
 header[data-testid="stHeader"] { background: transparent !important; height: 2.5rem !important; }
+/* Keep the dashboard clean for portfolio screenshots */
+div[data-testid="stToolbar"], div[data-testid="stDecoration"], #MainMenu { visibility: hidden !important; height: 0 !important; }
+iframe[title="streamlit_plotly_chart"] { overflow: hidden !important; }
+div[data-testid="stPlotlyChart"] > div { overflow: visible !important; }
 .block-container { padding: 2.1rem 1.6rem 1.2rem 1.6rem !important; max-width: 1900px; }
 h1 { line-height: 1.3 !important; overflow: visible !important; }
 h1 {
