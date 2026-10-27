@@ -49,7 +49,7 @@ div[data-testid="stPlotlyChart"] {
   background: #0d172b !important;
   border: 1px solid rgba(110,160,220,.32); border-radius: 14px; padding: 8px 8px 4px 8px;
   box-shadow: 0 8px 22px rgba(0,0,0,.22);
-  margin: 0 0 16px 0; overflow: visible !important;
+  margin: 0 0 16px 0; overflow: hidden !important; min-height: 0 !important;
 }
 div[data-testid="stPlotlyChart"] * { color: #eaf2ff; }
 div[data-testid="stPlotlyChart"]:hover { box-shadow: 0 8px 22px rgba(0,0,0,.22); }
