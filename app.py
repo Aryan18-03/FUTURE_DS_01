@@ -212,7 +212,7 @@ with left2:
                                paper_bgcolor="#0D172B", plot_bgcolor="#0D172B",
                                coloraxis_showscale=False, yaxis_title=None,
                                yaxis=dict(tickfont=dict(color="#EAF2FF")),
-                               xaxis=dict(gridcolor="rgba(151,180,220,0.16)", tickfont=dict(color="#EAF2FF"))
+                               xaxis=dict(gridcolor="rgba(151,180,220,0.16)", tickfont=dict(color="#EAF2FF")))
     st.plotly_chart(profit_chart, use_container_width=True, config={"displayModeBar": False})
 
 with right2:
