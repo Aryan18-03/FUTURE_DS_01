@@ -12,16 +12,16 @@ st.set_page_config(
 # Compact dashboard styling to reduce scrolling.
 st.markdown("""
 <style>
-.block-container {padding-top: .55rem; padding-bottom: .35rem; max-width: 1800px;}
-h1 {font-size: 1.55rem !important; padding-bottom: 0 !important; margin-bottom: .1rem !important;}
-h2, h3 {font-size: 1rem !important; margin-bottom: .25rem !important;}
-p {margin-bottom: .25rem;}
-div[data-testid="stMetric"] {padding: 5px 9px; border: 1px solid #e4e7eb; border-radius: 8px;}
+.block-container {padding-top: .25rem; padding-bottom: .1rem; max-width: 1900px;}
+h1 {font-size: 1.3rem !important; padding-bottom: 0 !important; margin-bottom: 0 !important; line-height: 1.15 !important;}
+h2, h3 {font-size: .9rem !important; margin-bottom: .15rem !important;}
+p {margin-bottom: .12rem;}
+div[data-testid="stMetric"] {padding: 3px 7px; border: 1px solid #e4e7eb; border-radius: 7px;}
 div[data-testid="stMetricLabel"] {font-size: .78rem;}
-div[data-testid="stMetricValue"] {font-size: 1.25rem;}
-div[data-testid="stPlotlyChart"] {margin-bottom: -22px;}
+div[data-testid="stMetricValue"] {font-size: 1.05rem;}
+div[data-testid="stPlotlyChart"] {margin-top: -8px; margin-bottom: -35px;}
 section[data-testid="stSidebar"] {min-width: 245px !important; max-width: 245px !important;}
-hr {margin: .35rem 0 !important;}
+hr {margin: .2rem 0 !important;}
 footer {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
@@ -102,7 +102,7 @@ elif status == "Loss-making only":
     filtered = filtered[filtered["Profit"] < 0]
 
 st.title("📊 Business Sales Performance Dashboard")
-st.caption("Future Interns • Task 1 | Sales, profit, product and regional performance")
+st.caption("Future Interns • Task 1 | Interactive sales, profit, product and regional analysis")
 
 if filtered.empty:
     st.warning("No records match these filters. Adjust the filters in the left sidebar.")
@@ -132,7 +132,7 @@ with left:
                  color="Category", color_discrete_map={"Technology": BLUE, "Furniture": ORANGE, "Office Supplies": GREEN},
                  title="Sales Share by Category")
     pie.update_traces(textposition="inside", textinfo="percent+label", textfont_size=11)
-    pie.update_layout(template="plotly_white", height=255, margin=dict(t=42,b=5,l=5,r=5), showlegend=False)
+    pie.update_layout(template="plotly_white", height=190, margin=dict(t=32,b=2,l=2,r=2), showlegend=False)
     st.plotly_chart(pie, use_container_width=True, config={"displayModeBar": False})
 
 with right:
@@ -151,7 +151,7 @@ with left2:
         title="Profit / Loss by Sub-category", labels={"Profit": "Profit ($)"}
     )
     profit_chart.add_vline(x=0, line_dash="dash", line_color="#343A40")
-    profit_chart.update_layout(template="plotly_white", height=300, margin=dict(t=42,b=5,l=5,r=5),
+    profit_chart.update_layout(template="plotly_white", height=215, margin=dict(t=32,b=2,l=2,r=2),
                                coloraxis_showscale=False, yaxis_title=None, xaxis=dict(gridcolor="#E9ECEF"))
     st.plotly_chart(profit_chart, use_container_width=True, config={"displayModeBar": False})
 
@@ -167,7 +167,7 @@ with right2:
 best_cat = category.loc[category["Sales"].idxmax()]
 best_region = region.loc[region["Sales"].idxmax()]
 worst_subcat = subcategory.iloc[0]
-ins1, ins2, ins3 = st.columns(3)
+ins1, ins2, ins3 = st.columns(3, gap="small")
 ins1.info(f"**Top category:** {best_cat['Category']} · ${best_cat['Sales']:,.0f} sales")
 ins2.info(f"**Top region:** {best_region['Region']} · ${best_region['Sales']:,.0f} sales")
 if worst_subcat["Profit"] < 0:
@@ -182,4 +182,4 @@ with st.expander("View data and download filtered records"):
     )
     st.dataframe(filtered, use_container_width=True, hide_index=True, height=240)
 
-st.caption("Source: Sample Superstore dataset. Synthetic dates and unverified product names are not used for conclusions.")
+st.caption("Source: Sample Superstore dataset. Synthetic dates and unverified product names are excluded from conclusions.")
