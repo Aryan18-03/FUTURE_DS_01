@@ -152,7 +152,7 @@ if status == "Profitable only":
 elif status == "Loss-making only":
     filtered = filtered[filtered["Profit"] < 0]
 
-st.title("Business Sales Performance Analysis")
+st.title("📊 Business Sales Performance Analysis")
 st.caption("FUTURE INTERNS · TASK 1  |  Sales, profitability and customer insights")
 
 if filtered.empty:
