@@ -182,7 +182,7 @@ with right:
     bar = px.bar(region, x="Region", y="Sales", color="Region", text="Sales",
                  color_discrete_sequence=PALETTE, title="Sales by Region")
     bar.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False)
-    bar.update_layout(template="plotly_white", height=255, showlegend=False,
+    bar.update_layout(template="plotly_dark", height=255, showlegend=False,
                       margin=dict(t=42,b=5,l=5,r=5), yaxis=dict(gridcolor="rgba(151,180,220,0.16)", zeroline=False), plot_bgcolor="#0D172B", paper_bgcolor="#0D172B", font=dict(family="Arial", color="#EAF2FF"))
     st.plotly_chart(bar, use_container_width=True, config={"displayModeBar": False})
 
@@ -194,8 +194,8 @@ with left2:
         title="Profit / Loss by Sub-category", labels={"Profit": "Profit ($)"}
     )
     profit_chart.add_vline(x=0, line_dash="dash", line_color="#B6C7E8")
-    profit_chart.update_layout(template="plotly_white", height=300, margin=dict(t=48,b=12,l=12,r=12),
-                               coloraxis_showscale=False, yaxis_title=None, xaxis=dict(gridcolor="#E9ECEF"))
+    profit_chart.update_layout(template="plotly_dark", height=300, margin=dict(t=48,b=12,l=12,r=12),
+                               coloraxis_showscale=False, yaxis_title=None, xaxis=dict(gridcolor="rgba(151,180,220,0.16)"))
     st.plotly_chart(profit_chart, use_container_width=True, config={"displayModeBar": False})
 
 with right2:
@@ -204,11 +204,11 @@ with right2:
                   title="Sales by Customer Segment")
     segment_chart.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False,
                                 marker_line_width=0)
-    segment_chart.update_layout(template="plotly_white", height=300, showlegend=False,
+    segment_chart.update_layout(template="plotly_dark", height=300, showlegend=False,
                        margin=dict(t=48,b=18,l=12,r=12),
-                       yaxis=dict(gridcolor="#E9ECEF", zeroline=False),
-                       plot_bgcolor="#FFFFFF", paper_bgcolor="#FFFFFF",
-                       font=dict(family="Arial", color="#23395D"))
+                       yaxis=dict(gridcolor="rgba(151,180,220,0.16)", zeroline=False),
+                       plot_bgcolor="#0D172B", paper_bgcolor="#0D172B",
+                       font=dict(family="Arial", color="#EAF2FF"))
     st.plotly_chart(segment_chart, use_container_width=True, config={"displayModeBar": False})
 
 # Compact line chart: sales trend across discount levels (dataset has no reliable date field).
@@ -225,10 +225,10 @@ trend = px.line(
 trend.update_traces(line=dict(color=BLUE, width=3), marker=dict(size=8, color=ORANGE),
                     fill="tozeroy", fillcolor="rgba(0,229,255,0.12)")
 trend.update_layout(
-    template="plotly_white", height=190,
+    template="plotly_dark", height=190,
     margin=dict(t=32, b=2, l=5, r=5),
-    xaxis=dict(tickformat=".0%", gridcolor="#E9ECEF"),
-    yaxis=dict(gridcolor="#E9ECEF")
+    xaxis=dict(tickformat=".0%", gridcolor="rgba(151,180,220,0.16)"),
+    yaxis=dict(gridcolor="rgba(151,180,220,0.16)")
 )
 st.plotly_chart(trend, use_container_width=True, config={"displayModeBar": False})
 
