@@ -26,9 +26,9 @@ div[data-testid="stToolbar"], div[data-testid="stDecoration"], #MainMenu { visib
 .block-container { padding: 2.1rem 1.6rem 1.2rem 1.6rem !important; max-width: 1900px; }
 h1 { line-height: 1.3 !important; overflow: visible !important; }
 h1 {
-  color: #f4f7ff !important; font-size: 1.9rem !important; font-weight: 750 !important;
-  letter-spacing: -.025em; text-shadow: none !important;
-  padding-bottom: .15rem !important; margin-bottom: .15rem !important;
+  color: #f4f7ff !important; font-size: 2.25rem !important; font-weight: 750 !important;
+  letter-spacing: -.025em; text-shadow: none !important; text-align: center !important;
+  width: 100%; padding-bottom: .15rem !important; margin-bottom: .15rem !important;
 }
 h2, h3 { color: #d7e5ff !important; text-shadow: none !important; font-weight: 650 !important; }
 section[data-testid="stSidebar"] h1,
