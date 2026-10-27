@@ -1,5 +1,15 @@
 # 📊 Business Sales Performance Analytics Dashboard
 
+# 📊 Business Sales Performance Analytics Dashboard
+
+## 🚀 Live Dashboard
+
+🔗 **[Click here to explore the interactive dashboard](https://futureds01-5hddaqfnzn8awz3zugsyef.streamlit.app/)**
+
+📊 Explore sales, profit, product categories, regional performance, and customer segments through interactive visualizations and filters.
+
+## 📑 Project Overview
+
 ## 📝 Project Overview
 
 This project analyzes retail sales data to understand sales performance, profitability, product categories, regional trends, and customer segments.
