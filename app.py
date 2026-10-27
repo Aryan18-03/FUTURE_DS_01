@@ -31,7 +31,7 @@ div[data-testid="stAlert"] { border-radius: 12px; }
 hr { margin: .5rem 0 !important; border-color: #e1e8f4; }
 footer { visibility: hidden; }
 </style>
-"""
+""", unsafe_allow_html=True)
 
 BLUE, ORANGE, GREEN, PURPLE = "#4263EB", "#F76707", "#12B886", "#7950F2"
 PALETTE = [BLUE, ORANGE, GREEN, PURPLE]
