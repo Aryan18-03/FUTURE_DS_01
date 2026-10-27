@@ -20,7 +20,9 @@ st.markdown("""
     linear-gradient(135deg, #050816 0%, #0a1020 52%, #080d1b 100%);
   color: #eaf2ff;
 }
-.block-container { padding: 1.1rem 1.5rem .8rem 1.5rem; max-width: 1900px; }
+header[data-testid="stHeader"] { background: transparent !important; height: 2.5rem !important; }
+.block-container { padding: 2.1rem 1.6rem 1.2rem 1.6rem !important; max-width: 1900px; }
+h1 { line-height: 1.3 !important; overflow: visible !important; }
 h1 {
   color: #f4f7ff !important; font-size: 1.9rem !important; font-weight: 750 !important;
   letter-spacing: -.025em; text-shadow: none !important;
@@ -42,12 +44,13 @@ div[data-testid="stMetric"] {
 div[data-testid="stMetricLabel"] { color: #9db5d8 !important; font-size: .82rem; font-weight: 650; }
 div[data-testid="stMetricValue"] { color: #f4fbff !important; font-size: 1.55rem; font-weight: 850; text-shadow: 0 0 12px rgba(0,229,255,.18); }
 div[data-testid="stPlotlyChart"] {
-  background: linear-gradient(145deg, rgba(15,24,45,.98), rgba(8,14,29,.98));
-  border: 1px solid rgba(0,229,255,.22); border-radius: 16px; padding: 8px 8px 0 8px;
-  box-shadow: 0 0 12px rgba(0,229,255,.08), 0 0 26px rgba(99,102,241,.08), 0 12px 30px rgba(0,0,0,.32);
-  margin: 0 0 13px 0; transition: box-shadow .25s ease, transform .25s ease;
+  background: #0d172b !important;
+  border: 1px solid rgba(110,160,220,.32); border-radius: 14px; padding: 8px 8px 4px 8px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.22);
+  margin: 0 0 16px 0; overflow: visible !important;
 }
-div[data-testid="stPlotlyChart"]:hover { box-shadow: 0 0 18px rgba(0,229,255,.17), 0 0 34px rgba(139,92,246,.14), 0 12px 30px rgba(0,0,0,.36); }
+div[data-testid="stPlotlyChart"] * { color: #eaf2ff; }
+div[data-testid="stPlotlyChart"]:hover { box-shadow: 0 10px 24px rgba(0,0,0,.28); }
 section[data-testid="stSidebar"] {
   background: linear-gradient(180deg, #0b1328 0%, #090f20 100%);
   border-right: 1px solid rgba(0,229,255,.25); min-width: 270px !important; max-width: 270px !important;
@@ -180,15 +183,20 @@ with left:
                  color="Category", color_discrete_map={"Technology": BLUE, "Furniture": ORANGE, "Office Supplies": GREEN},
                  title="Sales Share by Category")
     pie.update_traces(textposition="inside", textinfo="percent+label", textfont_size=11)
-    pie.update_layout(template="plotly_dark", height=260, margin=dict(t=48,b=12,l=12,r=12), showlegend=False)
+    pie.update_layout(template="plotly_dark", height=290, margin=dict(t=58,b=20,l=18,r=18), showlegend=False,
+                      title_font=dict(size=17, color="#F1F5FF"), font=dict(color="#EAF2FF"),
+                      paper_bgcolor="#0D172B", plot_bgcolor="#0D172B")
     st.plotly_chart(pie, use_container_width=True, config={"displayModeBar": False})
 
 with right:
     bar = px.bar(region, x="Region", y="Sales", color="Region", text="Sales",
                  color_discrete_sequence=PALETTE, title="Sales by Region")
     bar.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False)
-    bar.update_layout(template="plotly_dark", height=255, showlegend=False,
-                      margin=dict(t=42,b=5,l=5,r=5), yaxis=dict(gridcolor="rgba(151,180,220,0.16)", zeroline=False), plot_bgcolor="#0D172B", paper_bgcolor="#0D172B", font=dict(family="Arial", color="#EAF2FF"))
+    bar.update_layout(template="plotly_dark", height=290, showlegend=False,
+                      margin=dict(t=52,b=30,l=16,r=24), title_font=dict(size=17, color="#F1F5FF"),
+                      yaxis=dict(gridcolor="rgba(151,180,220,0.16)", zeroline=False, tickfont=dict(color="#EAF2FF")),
+                      xaxis=dict(tickfont=dict(color="#EAF2FF")),
+                      plot_bgcolor="#0D172B", paper_bgcolor="#0D172B", font=dict(family="Arial", color="#EAF2FF"))
     st.plotly_chart(bar, use_container_width=True, config={"displayModeBar": False})
 
 left2, right2 = st.columns(2, gap="medium")
@@ -199,8 +207,12 @@ with left2:
         title="Profit / Loss by Sub-category", labels={"Profit": "Profit ($)"}
     )
     profit_chart.add_vline(x=0, line_dash="dash", line_color="#B6C7E8")
-    profit_chart.update_layout(template="plotly_dark", height=300, margin=dict(t=48,b=12,l=12,r=12),
-                               coloraxis_showscale=False, yaxis_title=None, xaxis=dict(gridcolor="rgba(151,180,220,0.16)"))
+    profit_chart.update_layout(template="plotly_dark", height=340, margin=dict(t=58,b=24,l=12,r=18),
+                               title_font=dict(size=17, color="#F1F5FF"), font=dict(color="#EAF2FF"),
+                               paper_bgcolor="#0D172B", plot_bgcolor="#0D172B",
+                               coloraxis_showscale=False, yaxis_title=None,
+                               yaxis=dict(tickfont=dict(color="#EAF2FF")),
+                               xaxis=dict(gridcolor="rgba(151,180,220,0.16)", tickfont=dict(color="#EAF2FF"))
     st.plotly_chart(profit_chart, use_container_width=True, config={"displayModeBar": False})
 
 with right2:
@@ -209,9 +221,10 @@ with right2:
                   title="Sales by Customer Segment")
     segment_chart.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False,
                                 marker_line_width=0)
-    segment_chart.update_layout(template="plotly_dark", height=300, showlegend=False,
-                       margin=dict(t=48,b=18,l=12,r=12),
-                       yaxis=dict(gridcolor="rgba(151,180,220,0.16)", zeroline=False),
+    segment_chart.update_layout(template="plotly_dark", height=340, showlegend=False,
+                       margin=dict(t=58,b=30,l=16,r=18), title_font=dict(size=17, color="#F1F5FF"),
+                       yaxis=dict(gridcolor="rgba(151,180,220,0.16)", zeroline=False, tickfont=dict(color="#EAF2FF")),
+                       xaxis=dict(tickfont=dict(color="#EAF2FF")),
                        plot_bgcolor="#0D172B", paper_bgcolor="#0D172B",
                        font=dict(family="Arial", color="#EAF2FF"))
     st.plotly_chart(segment_chart, use_container_width=True, config={"displayModeBar": False})
@@ -230,8 +243,10 @@ trend = px.line(
 trend.update_traces(line=dict(color=BLUE, width=3), marker=dict(size=8, color=ORANGE),
                     fill="tozeroy", fillcolor="rgba(0,229,255,0.12)")
 trend.update_layout(
-    template="plotly_dark", height=190,
-    margin=dict(t=32, b=2, l=5, r=5),
+    template="plotly_dark", height=230,
+    margin=dict(t=48, b=24, l=16, r=18),
+    title_font=dict(size=17, color="#F1F5FF"), paper_bgcolor="#0D172B", plot_bgcolor="#0D172B",
+    font=dict(color="#EAF2FF"),
     xaxis=dict(tickformat=".0%", gridcolor="rgba(151,180,220,0.16)"),
     yaxis=dict(gridcolor="rgba(151,180,220,0.16)")
 )
