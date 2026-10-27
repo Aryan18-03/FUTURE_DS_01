@@ -163,12 +163,17 @@ with left2:
     st.plotly_chart(profit_chart, use_container_width=True, config={"displayModeBar": False})
 
 with right2:
-    line = px.bar(segment, x="Segment", y="Sales", color="Segment", text="Sales",
-                  color_discrete_sequence=PALETTE, title="Sales by Customer Segment")
-    line.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False)
-    line.update_layout(template="plotly_white", height=300, showlegend=False,
-                       margin=dict(t=42,b=5,l=5,r=5), yaxis=dict(gridcolor="#E9ECEF"))
-    st.plotly_chart(line, use_container_width=True, config={"displayModeBar": False})
+    segment_chart = px.bar(segment, x="Segment", y="Sales", color="Segment", text="Sales",
+                  color_discrete_map={"Consumer": BLUE, "Corporate": PURPLE, "Home Office": ORANGE},
+                  title="Sales by Customer Segment")
+    segment_chart.update_traces(texttemplate="$%{y:,.2s}", textposition="outside", cliponaxis=False,
+                                marker_line_width=0)
+    segment_chart.update_layout(template="plotly_white", height=300, showlegend=False,
+                       margin=dict(t=48,b=18,l=12,r=12),
+                       yaxis=dict(gridcolor="#E9ECEF", zeroline=False),
+                       plot_bgcolor="#FFFFFF", paper_bgcolor="#FFFFFF",
+                       font=dict(family="Arial", color="#23395D"))
+    st.plotly_chart(segment_chart, use_container_width=True, config={"displayModeBar": False})
 
 # Compact line chart: sales trend across discount levels (dataset has no reliable date field).
 discount_trend = (
