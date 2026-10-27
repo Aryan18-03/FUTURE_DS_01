@@ -121,6 +121,6 @@ This project demonstrates how retail sales data can be analyzed and transformed 
 
 🔗 GitHub: [github.com/Aryan18-03](https://github.com/Aryan18-03)
 
-🔗 LinkedIn: [linkedin.com/in/aryan-data-analyst](https://www.linkedin.com/in/aryan-data-analyst/)
+🔗 LinkedIn: [linkedin.com/in/aryan-data-analyst183](https://www.linkedin.com/in/aryan-data-analyst183/)
 
 ⭐ If you find this project interesting, consider starring the repository!
