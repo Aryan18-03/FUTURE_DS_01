@@ -104,52 +104,85 @@ if df.empty:
     st.error("The dataset has no usable rows.")
     st.stop()
 
-# All filters are vertical in the sidebar.
+# Collapsible checkbox filters, matching the Customer Churn dashboard.
 st.sidebar.title("🎛️ Filters")
-st.sidebar.caption("Change a filter to update every chart.")
+st.sidebar.caption("Open a filter, tick the options you want, and all charts will update.")
 regions = sorted(df["Region"].unique().tolist())
 categories = sorted(df["Category"].unique().tolist())
 segments = sorted(df["Segment"].unique().tolist())
 subcategories = sorted(df["Sub-Category"].unique().tolist())
 
-with st.sidebar:
-    if st.button("↩ Reset all filters", use_container_width=True):
-        for key in ["region_filter", "category_filter", "segment_filter", "subcategory_filter",
-                    "sales_filter", "profit_filter", "discount_filter", "status_filter", "ship_filter"]:
-            st.session_state.pop(key, None)
-        st.rerun()
+def reset_filters():
+    filter_keys = [
+        "sales_filter", "profit_filter", "discount_filter", "status_filter",
+        "sales_min_filter", "sales_max_filter", "profit_min_filter", "profit_max_filter",
+        "discount_min_filter", "discount_max_filter",
+    ]
+    filter_keys += [f"region_choice_{value}" for value in regions]
+    filter_keys += [f"category_choice_{value}" for value in categories]
+    filter_keys += [f"segment_choice_{value}" for value in segments]
+    filter_keys += [f"subcategory_choice_{value}" for value in subcategories]
+    if "Ship Mode" in df.columns:
+        filter_keys += [f"ship_choice_{value}" for value in sorted(df["Ship Mode"].dropna().unique().tolist())]
+    for key in filter_keys:
+        st.session_state.pop(key, None)
+    st.rerun()
 
-    selected_region = st.selectbox("Region", ["All regions"] + regions, key="region_filter")
-    selected_category = st.selectbox("Category", ["All categories"] + categories, key="category_filter")
-    selected_segment = st.selectbox("Customer Segment", ["All segments"] + segments, key="segment_filter")
-    selected_subcategory = st.selectbox("Sub-category", ["All sub-categories"] + subcategories, key="subcategory_filter")
+with st.sidebar:
+    if st.button("↩ Reset all filters", use_container_width=True, on_click=reset_filters):
+        pass
+
+    with st.expander("☷ Region", expanded=False):
+        for value in regions:
+            st.checkbox(value, value=True, key=f"region_choice_{value}")
+    with st.expander("☷ Category", expanded=False):
+        for value in categories:
+            st.checkbox(value, value=True, key=f"category_choice_{value}")
+    with st.expander("☷ Customer segment", expanded=False):
+        for value in segments:
+            st.checkbox(value, value=True, key=f"segment_choice_{value}")
+    with st.expander("☷ Sub-category", expanded=False):
+        for value in subcategories:
+            st.checkbox(value, value=True, key=f"subcategory_choice_{value}")
+
+    selected_regions = [value for value in regions if st.session_state.get(f"region_choice_{value}", True)]
+    selected_categories = [value for value in categories if st.session_state.get(f"category_choice_{value}", True)]
+    selected_segments = [value for value in segments if st.session_state.get(f"segment_choice_{value}", True)]
+    selected_subcategories = [value for value in subcategories if st.session_state.get(f"subcategory_choice_{value}", True)]
 
     sales_min, sales_max = float(df["Sales"].min()), float(df["Sales"].max())
     profit_min, profit_max = float(df["Profit"].min()), float(df["Profit"].max())
     discount_min, discount_max = float(df["Discount"].min()), float(df["Discount"].max())
 
-    sales_range = st.slider("Order sales ($)", sales_min, sales_max, (sales_min, sales_max), key="sales_filter")
-    profit_range = st.slider("Order profit ($)", profit_min, profit_max, (profit_min, profit_max), key="profit_filter")
-    discount_range = st.slider("Discount", discount_min, discount_max, (discount_min, discount_max), key="discount_filter")
+    with st.expander("☷ Order sales ($)", expanded=False):
+        sales_range = st.slider("Select range", sales_min, sales_max, (sales_min, sales_max), key="sales_filter")
+    with st.expander("☷ Order profit ($)", expanded=False):
+        profit_range = st.slider("Select range", profit_min, profit_max, (profit_min, profit_max), key="profit_filter")
+    with st.expander("☷ Discount", expanded=False):
+        discount_range = st.slider("Select range", discount_min, discount_max, (discount_min, discount_max), key="discount_filter")
 
-    status = st.selectbox("Order profitability", ["All orders", "Profitable only", "Loss-making only"], key="status_filter")
+    with st.expander("☷ Order profitability", expanded=False):
+        status = st.radio("Show", ["All orders", "Profitable only", "Loss-making only"], key="status_filter")
     if "Ship Mode" in df.columns:
         ship_options = sorted(df["Ship Mode"].dropna().unique().tolist())
-        selected_ship = st.selectbox("Shipping Mode", ["All shipping modes"] + ship_options, key="ship_filter")
+        with st.expander("☷ Shipping mode", expanded=False):
+            for value in ship_options:
+                st.checkbox(value, value=True, key=f"ship_choice_{value}")
+        selected_ship_modes = [value for value in ship_options if st.session_state.get(f"ship_choice_{value}", True)]
     else:
-        selected_ship = None
+        selected_ship_modes = None
 
 filtered = df[
-    (df["Region"].isin(regions) if selected_region == "All regions" else df["Region"].eq(selected_region))
-    & (df["Category"].isin(categories) if selected_category == "All categories" else df["Category"].eq(selected_category))
-    & (df["Segment"].isin(segments) if selected_segment == "All segments" else df["Segment"].eq(selected_segment))
-    & (df["Sub-Category"].isin(subcategories) if selected_subcategory == "All sub-categories" else df["Sub-Category"].eq(selected_subcategory))
+    df["Region"].isin(selected_regions)
+    & df["Category"].isin(selected_categories)
+    & df["Segment"].isin(selected_segments)
+    & df["Sub-Category"].isin(selected_subcategories)
     & df["Sales"].between(*sales_range)
     & df["Profit"].between(*profit_range)
     & df["Discount"].between(*discount_range)
 ].copy()
-if selected_ship is not None and selected_ship != "All shipping modes":
-    filtered = filtered[filtered["Ship Mode"].eq(selected_ship)]
+if selected_ship_modes is not None:
+    filtered = filtered[filtered["Ship Mode"].isin(selected_ship_modes)]
 if status == "Profitable only":
     filtered = filtered[filtered["Profit"] > 0]
 elif status == "Loss-making only":
