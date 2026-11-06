@@ -156,19 +156,19 @@ with st.sidebar:
         value=(discount_min, discount_max), key="discount_filter"
     )
 
-    with st.expander("Additional filters", expanded=False):
-        status = st.radio(
-            "Order profitability",
-            ["All orders", "Profitable only", "Loss-making only"],
-            key="status_filter"
+    status = st.selectbox(
+        "Order profitability",
+        ["All orders", "Profitable only", "Loss-making only"],
+        key="status_filter"
+    )
+
+    if "Ship Mode" in df.columns:
+        ship_options = sorted(df["Ship Mode"].dropna().unique().tolist())
+        selected_ship_modes = st.multiselect(
+            "Shipping Mode", ship_options, default=ship_options, key="ship_filter"
         )
-        if "Ship Mode" in df.columns:
-            ship_options = sorted(df["Ship Mode"].dropna().unique().tolist())
-            selected_ship_modes = st.multiselect(
-                "Shipping mode", ship_options, default=ship_options, key="ship_filter"
-            )
-        else:
-            selected_ship_modes = None
+    else:
+        selected_ship_modes = None
 
 filtered = df[
     (df["Region"].isin(regions) if selected_region == "All" else df["Region"].eq(selected_region))
