@@ -61,42 +61,42 @@ section[data-testid="stSidebar"] {
 }
 section[data-testid="stSidebar"] * { color: #eaf2ff; }
 section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #9eb2d6 !important; }
-/* Richer blue filter fields: brighter than near-black, without brown/grey tint */
+/* Black filter fields to match the reference dashboard */
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div,
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] {
-  background: linear-gradient(110deg, #183b68 0%, #263f78 100%) !important;
-  background-color: #1c3b69 !important;
-  background-image: linear-gradient(110deg, #183b68 0%, #263f78 100%) !important;
-  border: 1px solid #426b9c !important;
+  background: #05080f !important;
+  background-color: #05080f !important;
+  background-image: none !important;
+  border: 1px solid #26364f !important;
   border-radius: 7px !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.18) !important;
+  box-shadow: none !important;
   min-height: 36px !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover,
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"]:hover {
-  background: linear-gradient(110deg, #214b7c 0%, #304e8b 100%) !important;
-  background-color: #214b7c !important;
-  border-color: #5b8cbd !important;
+  background: #0a101c !important;
+  background-color: #0a101c !important;
+  border-color: #3b587d !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] span {
-  color: #f0f6ff !important;
-  font-weight: 550 !important;
+  color: #f0f4fb !important;
+  font-weight: 500 !important;
   font-size: .84rem !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
-  fill: #c0d8f5 !important;
-  color: #c0d8f5 !important;
+  fill: #b7c6dc !important;
+  color: #b7c6dc !important;
 }
 div[data-baseweb="popover"] [role="listbox"] {
-  background: #122744 !important;
-  border: 1px solid #426b9c !important;
+  background: #05080f !important;
+  border: 1px solid #26364f !important;
 }
 div[data-baseweb="popover"] [role="option"] {
-  color: #edf5ff !important;
-  background: #122744 !important;
+  color: #edf3fc !important;
+  background: #05080f !important;
 }
 div[data-baseweb="popover"] [role="option"][aria-selected="true"] {
-  background: #245184 !important;
+  background: #17243a !important;
 }
 /* Coral slider accents from the reference screenshot */
 section[data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[role="progressbar"] {
