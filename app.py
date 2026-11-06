@@ -61,11 +61,36 @@ section[data-testid="stSidebar"] {
 }
 section[data-testid="stSidebar"] * { color: #eaf2ff; }
 section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #9eb2d6 !important; }
-section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
-  background: #111d35 !important; border: 1px solid rgba(0,229,255,.30) !important; border-radius: 10px !important;
-  box-shadow: 0 0 10px rgba(0,229,255,.05);
+/* Brighter, higher-contrast dropdown controls in the sidebar */
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+  background: linear-gradient(110deg, #123b5b 0%, #202b59 100%) !important;
+  background-color: #173653 !important;
+  border: 1px solid rgba(0,229,255,.72) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 1px rgba(0,229,255,.12), 0 0 16px rgba(0,229,255,.18) !important;
+  min-height: 42px !important;
 }
-section[data-testid="stSidebar"] div[data-baseweb="select"] span { color: #edf7ff !important; }
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"]:hover > div {
+  border-color: #35f2ff !important;
+  box-shadow: 0 0 0 1px rgba(53,242,255,.22), 0 0 20px rgba(0,229,255,.25) !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] span {
+  color: #f4fbff !important;
+  font-weight: 600 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
+  fill: #8ff5ff !important;
+  color: #8ff5ff !important;
+}
+div[data-baseweb="popover"] ul {
+  background: #101d36 !important;
+}
+div[data-baseweb="popover"] li {
+  color: #edf7ff !important;
+}
+div[data-baseweb="popover"] li[aria-selected="true"] {
+  background: #16486a !important;
+}
 section[data-testid="stSidebar"] input { color: #edf7ff !important; }
 section[data-testid="stSidebar"] button {
   background: linear-gradient(90deg, #12334b, #24214c) !important; border: 1px solid rgba(0,229,255,.35) !important;
