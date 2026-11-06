@@ -61,45 +61,44 @@ section[data-testid="stSidebar"] {
 }
 section[data-testid="stSidebar"] * { color: #eaf2ff; }
 section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #9eb2d6 !important; }
-/* Reference-style compact filter controls: deep navy fields and coral sliders */
-section[data-testid="stSidebar"] {
-  background: linear-gradient(180deg, #081329 0%, #070f21 100%) !important;
-}
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div {
-  background: #0b1427 !important;
-  background-color: #0b1427 !important;
-  background-image: none !important;
-  border: 1px solid #243b60 !important;
+/* Richer blue filter fields: brighter than near-black, without brown/grey tint */
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div,
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] {
+  background: linear-gradient(110deg, #183b68 0%, #263f78 100%) !important;
+  background-color: #1c3b69 !important;
+  background-image: linear-gradient(110deg, #183b68 0%, #263f78 100%) !important;
+  border: 1px solid #426b9c !important;
   border-radius: 7px !important;
-  box-shadow: none !important;
-  min-height: 34px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.18) !important;
+  min-height: 36px !important;
 }
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover {
-  background: #101e38 !important;
-  border-color: #42628d !important;
-  box-shadow: 0 0 8px rgba(35,100,170,.12) !important;
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover,
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"]:hover {
+  background: linear-gradient(110deg, #214b7c 0%, #304e8b 100%) !important;
+  background-color: #214b7c !important;
+  border-color: #5b8cbd !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] span {
-  color: #e7efff !important;
-  font-weight: 500 !important;
-  font-size: .82rem !important;
+  color: #f0f6ff !important;
+  font-weight: 550 !important;
+  font-size: .84rem !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
-  fill: #9db8df !important;
-  color: #9db8df !important;
+  fill: #c0d8f5 !important;
+  color: #c0d8f5 !important;
 }
 div[data-baseweb="popover"] [role="listbox"] {
-  background: #0b1427 !important;
-  border: 1px solid #294568 !important;
+  background: #122744 !important;
+  border: 1px solid #426b9c !important;
 }
 div[data-baseweb="popover"] [role="option"] {
-  color: #e7efff !important;
-  background: #0b1427 !important;
+  color: #edf5ff !important;
+  background: #122744 !important;
 }
 div[data-baseweb="popover"] [role="option"][aria-selected="true"] {
-  background: #183052 !important;
+  background: #245184 !important;
 }
-/* Match the coral-red slider track and handles in the reference */
+/* Coral slider accents from the reference screenshot */
 section[data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[role="progressbar"] {
   background: #f04455 !important;
 }
