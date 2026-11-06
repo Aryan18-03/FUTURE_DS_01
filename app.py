@@ -124,17 +124,19 @@ def reset_filters():
 with st.sidebar:
     st.button("↩ Reset All Filters", use_container_width=True, on_click=reset_filters)
 
-    selected_regions = st.multiselect(
-        "Region", regions, default=regions, key="region_filter"
+    # Single-select dropdowns keep the sidebar compact and uncluttered.
+    all_label = "All"
+    selected_region = st.selectbox(
+        "Region", [all_label] + regions, index=0, key="region_filter"
     )
-    selected_categories = st.multiselect(
-        "Category", categories, default=categories, key="category_filter"
+    selected_category = st.selectbox(
+        "Category", [all_label] + categories, index=0, key="category_filter"
     )
-    selected_segments = st.multiselect(
-        "Customer Segment", segments, default=segments, key="segment_filter"
+    selected_segment = st.selectbox(
+        "Customer Segment", [all_label] + segments, index=0, key="segment_filter"
     )
-    selected_subcategories = st.multiselect(
-        "Sub-category", subcategories, default=subcategories, key="subcategory_filter"
+    selected_subcategory = st.selectbox(
+        "Sub-category", [all_label] + subcategories, index=0, key="subcategory_filter"
     )
 
     sales_min, sales_max = float(df["Sales"].min()), float(df["Sales"].max())
@@ -169,10 +171,10 @@ with st.sidebar:
             selected_ship_modes = None
 
 filtered = df[
-    df["Region"].isin(selected_regions)
-    & df["Category"].isin(selected_categories)
-    & df["Segment"].isin(selected_segments)
-    & df["Sub-Category"].isin(selected_subcategories)
+    (df["Region"].isin(regions) if selected_region == "All" else df["Region"].eq(selected_region))
+    & (df["Category"].isin(categories) if selected_category == "All" else df["Category"].eq(selected_category))
+    & (df["Segment"].isin(segments) if selected_segment == "All" else df["Segment"].eq(selected_segment))
+    & (df["Sub-Category"].isin(subcategories) if selected_subcategory == "All" else df["Sub-Category"].eq(selected_subcategory))
     & df["Sales"].between(*sales_range)
     & df["Profit"].between(*profit_range)
     & df["Discount"].between(*discount_range)
