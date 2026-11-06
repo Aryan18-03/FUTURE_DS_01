@@ -104,73 +104,69 @@ if df.empty:
     st.error("The dataset has no usable rows.")
     st.stop()
 
-# Collapsible checkbox filters, matching the Customer Churn dashboard.
+# Direct dropdown and range filters, restoring the original sidebar layout.
 st.sidebar.title("🎛️ Filters")
-st.sidebar.caption("Open a filter, tick the options you want, and all charts will update.")
+st.sidebar.caption("Choose values below to update the dashboard.")
+
 regions = sorted(df["Region"].unique().tolist())
 categories = sorted(df["Category"].unique().tolist())
 segments = sorted(df["Segment"].unique().tolist())
 subcategories = sorted(df["Sub-Category"].unique().tolist())
 
 def reset_filters():
-    filter_keys = [
+    for key in [
+        "region_filter", "category_filter", "segment_filter", "subcategory_filter",
         "sales_filter", "profit_filter", "discount_filter", "status_filter",
-        "sales_min_filter", "sales_max_filter", "profit_min_filter", "profit_max_filter",
-        "discount_min_filter", "discount_max_filter",
-    ]
-    filter_keys += [f"region_choice_{value}" for value in regions]
-    filter_keys += [f"category_choice_{value}" for value in categories]
-    filter_keys += [f"segment_choice_{value}" for value in segments]
-    filter_keys += [f"subcategory_choice_{value}" for value in subcategories]
-    if "Ship Mode" in df.columns:
-        filter_keys += [f"ship_choice_{value}" for value in sorted(df["Ship Mode"].dropna().unique().tolist())]
-    for key in filter_keys:
+        "ship_filter",
+    ]:
         st.session_state.pop(key, None)
-    st.rerun()
 
 with st.sidebar:
-    if st.button("↩ Reset all filters", use_container_width=True, on_click=reset_filters):
-        pass
+    st.button("↩ Reset All Filters", use_container_width=True, on_click=reset_filters)
 
-    with st.expander("☷ Region", expanded=False):
-        for value in regions:
-            st.checkbox(value, value=True, key=f"region_choice_{value}")
-    with st.expander("☷ Category", expanded=False):
-        for value in categories:
-            st.checkbox(value, value=True, key=f"category_choice_{value}")
-    with st.expander("☷ Customer segment", expanded=False):
-        for value in segments:
-            st.checkbox(value, value=True, key=f"segment_choice_{value}")
-    with st.expander("☷ Sub-category", expanded=False):
-        for value in subcategories:
-            st.checkbox(value, value=True, key=f"subcategory_choice_{value}")
-
-    selected_regions = [value for value in regions if st.session_state.get(f"region_choice_{value}", True)]
-    selected_categories = [value for value in categories if st.session_state.get(f"category_choice_{value}", True)]
-    selected_segments = [value for value in segments if st.session_state.get(f"segment_choice_{value}", True)]
-    selected_subcategories = [value for value in subcategories if st.session_state.get(f"subcategory_choice_{value}", True)]
+    selected_regions = st.multiselect(
+        "Region", regions, default=regions, key="region_filter"
+    )
+    selected_categories = st.multiselect(
+        "Category", categories, default=categories, key="category_filter"
+    )
+    selected_segments = st.multiselect(
+        "Customer Segment", segments, default=segments, key="segment_filter"
+    )
+    selected_subcategories = st.multiselect(
+        "Sub-category", subcategories, default=subcategories, key="subcategory_filter"
+    )
 
     sales_min, sales_max = float(df["Sales"].min()), float(df["Sales"].max())
     profit_min, profit_max = float(df["Profit"].min()), float(df["Profit"].max())
     discount_min, discount_max = float(df["Discount"].min()), float(df["Discount"].max())
 
-    with st.expander("☷ Order sales ($)", expanded=False):
-        sales_range = st.slider("Select range", sales_min, sales_max, (sales_min, sales_max), key="sales_filter")
-    with st.expander("☷ Order profit ($)", expanded=False):
-        profit_range = st.slider("Select range", profit_min, profit_max, (profit_min, profit_max), key="profit_filter")
-    with st.expander("☷ Discount", expanded=False):
-        discount_range = st.slider("Select range", discount_min, discount_max, (discount_min, discount_max), key="discount_filter")
+    sales_range = st.slider(
+        "Order Sales ($)", min_value=sales_min, max_value=sales_max,
+        value=(sales_min, sales_max), key="sales_filter"
+    )
+    profit_range = st.slider(
+        "Order Profit ($)", min_value=profit_min, max_value=profit_max,
+        value=(profit_min, profit_max), key="profit_filter"
+    )
+    discount_range = st.slider(
+        "Discount", min_value=discount_min, max_value=discount_max,
+        value=(discount_min, discount_max), key="discount_filter"
+    )
 
-    with st.expander("☷ Order profitability", expanded=False):
-        status = st.radio("Show", ["All orders", "Profitable only", "Loss-making only"], key="status_filter")
-    if "Ship Mode" in df.columns:
-        ship_options = sorted(df["Ship Mode"].dropna().unique().tolist())
-        with st.expander("☷ Shipping mode", expanded=False):
-            for value in ship_options:
-                st.checkbox(value, value=True, key=f"ship_choice_{value}")
-        selected_ship_modes = [value for value in ship_options if st.session_state.get(f"ship_choice_{value}", True)]
-    else:
-        selected_ship_modes = None
+    with st.expander("Additional filters", expanded=False):
+        status = st.radio(
+            "Order profitability",
+            ["All orders", "Profitable only", "Loss-making only"],
+            key="status_filter"
+        )
+        if "Ship Mode" in df.columns:
+            ship_options = sorted(df["Ship Mode"].dropna().unique().tolist())
+            selected_ship_modes = st.multiselect(
+                "Shipping mode", ship_options, default=ship_options, key="ship_filter"
+            )
+        else:
+            selected_ship_modes = None
 
 filtered = df[
     df["Region"].isin(selected_regions)
