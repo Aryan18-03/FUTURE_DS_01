@@ -61,42 +61,62 @@ section[data-testid="stSidebar"] {
 }
 section[data-testid="stSidebar"] * { color: #eaf2ff; }
 section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #9eb2d6 !important; }
-/* Saturated blue dropdowns: remove the muddy/brown appearance */
-section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] {
-  background: #123d68 !important;
-  background-color: #123d68 !important;
-  background-image: linear-gradient(115deg, #12466f 0%, #263b78 100%) !important;
-  border: 1px solid #00d9ff !important;
-  border-radius: 10px !important;
-  box-shadow: 0 0 0 1px rgba(0,217,255,.18), 0 0 18px rgba(0,217,255,.22) !important;
-  min-height: 42px !important;
+/* Reference-style compact filter controls: deep navy fields and coral sliders */
+section[data-testid="stSidebar"] {
+  background: linear-gradient(180deg, #081329 0%, #070f21 100%) !important;
 }
-section[data-testid="stSidebar"] div[data-baseweb="select"] > div:hover,
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"]:hover {
-  background: #185887 !important;
-  background-image: linear-gradient(115deg, #185887 0%, #344b91 100%) !important;
-  border-color: #5af1ff !important;
-  box-shadow: 0 0 22px rgba(0,217,255,.32) !important;
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+  background: #0b1427 !important;
+  background-color: #0b1427 !important;
+  background-image: none !important;
+  border: 1px solid #243b60 !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  min-height: 34px !important;
 }
-section[data-testid="stSidebar"] div[data-baseweb="select"] span {
-  color: #f5fbff !important;
-  font-weight: 600 !important;
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover {
+  background: #101e38 !important;
+  border-color: #42628d !important;
+  box-shadow: 0 0 8px rgba(35,100,170,.12) !important;
 }
-section[data-testid="stSidebar"] div[data-baseweb="select"] svg {
-  fill: #8ff5ff !important;
-  color: #8ff5ff !important;
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] span {
+  color: #e7efff !important;
+  font-weight: 500 !important;
+  font-size: .82rem !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
+  fill: #9db8df !important;
+  color: #9db8df !important;
 }
 div[data-baseweb="popover"] [role="listbox"] {
-  background: #0d1d38 !important;
-  border: 1px solid #00d9ff !important;
+  background: #0b1427 !important;
+  border: 1px solid #294568 !important;
 }
 div[data-baseweb="popover"] [role="option"] {
-  color: #edf7ff !important;
-  background: #0d1d38 !important;
+  color: #e7efff !important;
+  background: #0b1427 !important;
 }
 div[data-baseweb="popover"] [role="option"][aria-selected="true"] {
-  background: #185887 !important;
+  background: #183052 !important;
+}
+/* Match the coral-red slider track and handles in the reference */
+section[data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[role="progressbar"] {
+  background: #f04455 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {
+  background: #f04455 !important;
+  border: 2px solid #f04455 !important;
+  box-shadow: 0 0 0 2px rgba(240,68,85,.12) !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] > div {
+  background-color: #f04455 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSlider"] {
+  padding-top: 0 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSelectbox"],
+section[data-testid="stSidebar"] [data-testid="stSlider"] {
+  margin-bottom: .15rem !important;
 }
 section[data-testid="stSidebar"] input { color: #edf7ff !important; }
 section[data-testid="stSidebar"] button {
