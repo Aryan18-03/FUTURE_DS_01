@@ -164,11 +164,11 @@ with st.sidebar:
 
     if "Ship Mode" in df.columns:
         ship_options = sorted(df["Ship Mode"].dropna().unique().tolist())
-        selected_ship_modes = st.multiselect(
-            "Shipping Mode", ship_options, default=ship_options, key="ship_filter"
+        selected_ship_mode = st.selectbox(
+            "Shipping Mode", ["All"] + ship_options, index=0, key="ship_filter"
         )
     else:
-        selected_ship_modes = None
+        selected_ship_mode = None
 
 filtered = df[
     (df["Region"].isin(regions) if selected_region == "All" else df["Region"].eq(selected_region))
@@ -179,8 +179,8 @@ filtered = df[
     & df["Profit"].between(*profit_range)
     & df["Discount"].between(*discount_range)
 ].copy()
-if selected_ship_modes is not None:
-    filtered = filtered[filtered["Ship Mode"].isin(selected_ship_modes)]
+if selected_ship_mode is not None and selected_ship_mode != "All":
+    filtered = filtered[filtered["Ship Mode"] == selected_ship_mode]
 if status == "Profitable only":
     filtered = filtered[filtered["Profit"] > 0]
 elif status == "Loss-making only":
