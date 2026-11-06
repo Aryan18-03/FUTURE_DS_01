@@ -61,16 +61,22 @@ section[data-testid="stSidebar"] {
 }
 section[data-testid="stSidebar"] * { color: #eaf2ff; }
 section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color: #9eb2d6 !important; }
-/* Clean black filter fields with no internal outlines or borders */
+/* Flat black filter controls: remove all inner borders, outlines and inset rings */
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"],
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div,
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"],
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] input,
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] [data-baseweb="select"] * {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div,
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"] {
   background: #05080f !important;
   background-color: #05080f !important;
   background-image: none !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border-radius: 7px !important;
+  border-radius: 6px !important;
   min-height: 36px !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover,
@@ -79,9 +85,6 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"]:f
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] [role="combobox"]:focus-within {
   background: #0a101c !important;
   background-color: #0a101c !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] div[data-baseweb="select"] span {
   color: #f0f4fb !important;
@@ -94,13 +97,14 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"] svg {
 }
 div[data-baseweb="popover"] [role="listbox"] {
   background: #05080f !important;
-  border: none !important;
+  border: 0 !important;
   box-shadow: 0 8px 24px rgba(0,0,0,.45) !important;
 }
 div[data-baseweb="popover"] [role="option"] {
   color: #edf3fc !important;
   background: #05080f !important;
-  border: none !important;
+  border: 0 !important;
+  outline: 0 !important;
 }
 div[data-baseweb="popover"] [role="option"][aria-selected="true"] {
   background: #17243a !important;
